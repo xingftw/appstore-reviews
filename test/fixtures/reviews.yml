@@ -6,7 +6,7 @@ one:
   shop_url: MyString
   rating: 1
   body: MyText
-  published_at: 
+  published_at: 2017-12-22 13:14:55
   appstore: MyString
   account_id: 
 
@@ -16,6 +16,6 @@ two:
   shop_url: MyString
   rating: 1
   body: MyText
-  published_at: 
+  published_at: 2017-12-22 13:14:55
   appstore: MyString
   account_id: 
