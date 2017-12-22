@@ -1,8 +1,8 @@
 require 'test_helper'
 
 class FetchControllerTest < ActionDispatch::IntegrationTest
-  test "should get index" do
-    get fetch_index_url
+  test "should get shopify" do
+    get fetch_shopify_url
     assert_response :success
   end
 

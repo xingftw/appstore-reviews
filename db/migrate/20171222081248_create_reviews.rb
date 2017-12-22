@@ -6,7 +6,7 @@ class CreateReviews < ActiveRecord::Migration[5.1]
       t.string :shop_url
       t.integer :rating
       t.text :body
-      t.timestampz :published_at
+      t.datetime :published_at
       t.string :appstore
       t.bigint :account_id
 
