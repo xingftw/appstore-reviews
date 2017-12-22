@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171222094455) do
+ActiveRecord::Schema.define(version: 20171222222814) do
 
   create_table "reviews", force: :cascade do |t|
     t.string "external_id"
@@ -23,6 +23,8 @@ ActiveRecord::Schema.define(version: 20171222094455) do
     t.bigint "account_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["external_id"], name: "index_reviews_on_external_id", unique: true
+    t.index ["published_at"], name: "index_reviews_on_published_at"
   end
 
 end
