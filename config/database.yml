@@ -23,3 +23,31 @@ test:
 production:
   <<: *default
   database: db/production.sqlite3
+
+
+################################################################
+## SMILE DATABASE ##
+################################################################
+
+smile_default: &smile_default
+  adapter: postgresql
+  encoding: utf8
+
+smile_development:
+  <<: *smile_default
+  url: <%= ENV['SMILE_DATABASE_URL'] %>
+
+# Warning: The database defined as "test" will be erased and
+# re-generated from your development database when you run "rake".
+# Do not set this db to the same as development or production.
+smile_test:
+  <<: *default
+  database: db/test.sqlite3
+
+smile_staging:
+  <<: *smile_default
+  url: <%= ENV['SMILE_DATABASE_URL'] %>
+
+smile_production:
+  <<: *smile_default
+  url: <%= ENV['SMILE_DATABASE_URL'] %>

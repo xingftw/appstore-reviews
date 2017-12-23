@@ -4,6 +4,9 @@
 <h2>Output:</h2>
 <ul>
 <% @reviews.each do |review| %>
-  <li><%= review.inspect %></li>
+  <li>
+    <%= review.inspect %>
+    <br/><br/>
+  </li>
 <% end %>
 </ul>

@@ -9,6 +9,7 @@ class FetchController < ApplicationController
   def shopify
     @reviews = []
     shouldSave = true
+    accountLookup = true
     page = params[:page] ||= 1
     fetchUrl = SHOPIFY_APPSTORE_URL + "?page=#{page}#reviews"
     document = Nokogiri::HTML(open(fetchUrl))
@@ -19,11 +20,12 @@ class FetchController < ApplicationController
     reviewElements.each do |reviewElement|
       externalId = reviewElement['data-review_id']
       review = Review.find_by_external_id(externalId)
-      if review.nil?
-        logger.debug "Review #{externalId} not found in DB. Creating a new one."
+      if (review.nil?)
         review = Review.new
         review.external_id = externalId
       end
+
+      review.appstore = APPSTORE_NAME
 
       ratingElement = reviewElement.search('[itemprop=reviewRating]').last
       review.rating = ratingElement['content']
@@ -38,13 +40,20 @@ class FetchController < ApplicationController
       review.shop_url = authorElement['href']
       review.shop_name = authorElement.text
 
-      review.appstore = APPSTORE_NAME
+      if (accountLookup && review.account_id.nil?)
+        channelExternalId = review.shop_url.sub('https://', '').sub('http://', '')
+        channel = Channel::Shopify.find_by_external_id(channelExternalId)
+        if (!channel.nil?)
+          review.account_id = channel.account_id
+        end
+      end
 
-      if shouldSave
+      if (shouldSave)
         review.save
       end
 
-      @reviews.push(review);
+      @reviews.push(review)
     end
   end
+
 end
