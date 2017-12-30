@@ -54,6 +54,8 @@ class FetchController < ApplicationController
 
       @reviews.push(review)
     end
+
+    render json: @reviews
   end
 
 end
