@@ -5,6 +5,11 @@ class Scraper::Shopify
   APPSTORE_NAME = 'Shopify'
   APPSTORE_URL = 'https://apps.shopify.com/smile-io'
 
+  # Will fetch reviews from all pages of the app store
+  # Params:
+  # +shouldLookupAccount+:: if true, will also look up matching Smile Account
+  # +shouldSave+:: if true, will save the review to local database
+  # +enableLog+:: if true, will use +puts+ statements to print progress to console
   def self.fetchAllPages(shouldLookupAccount, shouldSave, enableLog)
     reviews = []
     currentPage = 1
@@ -26,7 +31,11 @@ class Scraper::Shopify
     reviews
   end
 
-
+  # Will fetch reviews from a page in the app store
+  # Params:
+  # +page+:: page number to fetch reviews from.
+  # +shouldLookupAccount+:: if true, will also look up matching Smile Account
+  # +shouldSave+:: if true, will save the review to local database
   def self.fetchPage (page, shouldLookupAccount, shouldSave)
     reviews = []
     fetchUrl = APPSTORE_URL + "?page=#{page}#reviews"
