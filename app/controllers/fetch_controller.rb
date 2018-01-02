@@ -3,7 +3,6 @@ require 'open-uri'
 
 class FetchController < ApplicationController
 
-
   def shopify
     shouldSave = params[:save] ||= ''
     if shouldSave.downcase == 'false' || shouldSave == '0'
