@@ -6,7 +6,7 @@ Simple Rails project deployed on Heroku that fetches and stores (Shopify) app st
 Application is deployed at https://appstore-reviews.herokuapp.com/
 _You'll need Basic HTTP Authorization to access the end-points. Ask *Mohsen* for credentials._
 
-### End-Point: [/fetch/shopify](https://appstore-reviews.herokuapp.com/fetch/shopify)
+### :large_blue_diamond: End-Point: [/fetch/shopify](https://appstore-reviews.herokuapp.com/fetch/shopify)
 End-point will fetch a specific review page, match each review against a Smile account, store in the review in the database, and produce a JSON array of reviews on the specified page.
 **GET Options:**
  * `page`: Page number to retrieve *(default = `1`)*
@@ -16,19 +16,19 @@ End-point will fetch a specific review page, match each review against a Smile a
 **Example URL:**
  * https://appstore-reviews.herokuapp.com/fetch/shopify?page=1&save=true&account_lookup=true
 
-### End-Point: [/reviews](https://appstore-reviews.herokuapp.com/reviews)
+### :large_blue_diamond: End-Point: [/reviews](https://appstore-reviews.herokuapp.com/reviews)
 End-point will retrieve all reviews store in the database (not the app-store!) and display as a JSON array. 
 
 **Example URL:**
  * https://appstore-reviews.herokuapp.com/reviews
 
-### End-Point: [/reviews/:id](https://appstore-reviews.herokuapp.com/reviews/:id)
+### :large_blue_diamond: End-Point: [/reviews/:id](https://appstore-reviews.herokuapp.com/reviews/:id)
 End-point will retrieve a particular review from the database, specified by it's internal-id, and display as JSON.
 
 **Example URL:**
  * https://appstore-reviews.herokuapp.com/reviews/1
 
-### Task: `rake scrape:shopify:all`
+### :large_blue_diamond: Task: `rake scrape:shopify:all`
 Rake task will visit every review page of the app store listing, and save or update all reviews in the database.
 
 **Scheduled:**
