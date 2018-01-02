@@ -1,19 +1,21 @@
+require "net/http"
+
 class Scraper::Shopify
 
   APPSTORE_NAME = 'Shopify'
   APPSTORE_URL = 'https://apps.shopify.com/smile-io'
 
-  def self.fetchAllPages(shouldLookupAccount, shouldSave)
+  def self.fetchAllPages(shouldLookupAccount, shouldSave, enableLog)
     reviews = []
     currentPage = 1
     while true do
-      logger.debug "Fetching page #{currentPage}"
+      puts "Fetching page #{currentPage}..." if enableLog
       reviewsOfCurrentPage = fetchPage(currentPage, shouldLookupAccount, shouldSave)
-      logger.debug "Got all reviews in page #{currentPage}"
+      puts "\tFetched all on page #{currentPage}"  if enableLog
       reviewsOfCurrentPage.each do |review|
         reviews.push(review)
       end
-      logger.debug "Done storing reviews in page #{currentPage}"
+      puts "\tStored all on page #{currentPage}\n" if enableLog
       currentPage += 1
 
       if reviewsOfCurrentPage.empty?
@@ -28,7 +30,8 @@ class Scraper::Shopify
   def self.fetchPage (page, shouldLookupAccount, shouldSave)
     reviews = []
     fetchUrl = APPSTORE_URL + "?page=#{page}#reviews"
-    document = Nokogiri::HTML(open(fetchUrl))
+    response = Net::HTTP.get_response(URI(fetchUrl)).body
+    document = Nokogiri::HTML(response)
 
     reviewsSection = document.search('[id=reviews]')
     reviewElements = reviewsSection.search('[itemprop=review]')
